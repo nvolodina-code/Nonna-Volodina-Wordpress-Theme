@@ -1,0 +1,23 @@
+@use '../abstracts' as *;
+
+:root {
+	color-scheme: light dark;
+}
+
+html { 
+	box-sizing: border-box; 
+}
+
+*,
+*::before,
+*::after { 
+	box-sizing: inherit; 
+}
+
+.wrapper { 
+	@include container; 
+}
+
+.screen-reader-text { 
+	@include sr-only; 
+}

@@ -1,0 +1,110 @@
+@mixin container {
+    width: min(1100px, 90vw);
+    margin-inline: auto;
+}
+
+@mixin sr-only {
+    position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0;
+}
+
+@mixin pseudo($which: before, $content: '', $pos: absolute) {
+    &::#{$which} {
+        content: $content;
+        position: $pos;
+    }
+}
+
+@mixin absolute-center($axis: both) {
+	position: absolute;
+
+	@if $axis == both {
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	} @else if $axis == x {
+		left: 50%;
+		transform: translateX(-50%);
+	} @else if $axis == y {
+		top: 50%;
+		transform: translateY(-50%);
+	}
+}
+
+@function fluid($min, $max, $min-vw: 320px, $max-vw: 1200px) {
+	$min-value: strip-unit($min);
+	$max-value: strip-unit($max);
+	$min-vw-value: strip-unit($min-vw);
+	$max-vw-value: strip-unit($max-vw);
+
+	@return clamp(
+		#{$min},
+		calc(#{$min-value}px + (#{$max-value - $min-value}) * ((100vw - #{$min-vw-value}px) / (#{$max-vw-value - $min-vw-value}))),
+		#{$max}
+	);
+}
+
+@mixin clamp-fluid($property, $min, $max, $min-vw: 320px, $max-vw: 1200px) {
+	#{$property}: fluid($min, $max, $min-vw, $max-vw);
+}
+
+@mixin flex-center($direction: row, $gap: 0) {
+	display: flex;
+	flex-direction: $direction;
+	align-items: center;
+	justify-content: center;
+	gap: $gap;
+}
+
+@mixin grid($cols: 2, $gap: 1rem) {
+	display: grid;
+	grid-template-columns: repeat($cols, 1fr);
+	gap: $gap;
+}
+
+@mixin absolute-fill($inset: 0) {
+	position: absolute;
+	inset: $inset;
+}
+
+@mixin text-truncate {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+@mixin fluid-type($min, $max, $min-vw: 320px, $max-vw: 1200px) {
+	font-size: fluid($min, $max, $min-vw, $max-vw);
+}
+
+@mixin font-smooth {
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+@mixin aspect-ratio($w, $h) {
+	position: relative;
+	&::before {
+		content: '';
+		display: block;
+		padding-top: ($h / $w) * 100%;
+	}
+	> * {
+		position: absolute;
+		inset: 0;
+	}
+}
+
+@function space($min, $max) {
+	@return fluid($min, $max);
+}
+
+@mixin respond($break) {
+	$size: map-get($breakpoints, $break);
+	@if $size {
+		@media (min-width: $size) {
+			@content;
+		}
+	} @else {
+		@warn "No breakpoint named `#{$break}` found.";
+	}
+}
