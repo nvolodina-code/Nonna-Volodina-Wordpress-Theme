@@ -11,9 +11,9 @@ Designed for developers who want full control with zero bloat.
 
 2. **Build once**
     ```bash
-    npm run build
+    gulp build
 
 3. **Watch for changes (SCSS + JS)**
 
     ```bash
-    npm run dev
+    gulp
