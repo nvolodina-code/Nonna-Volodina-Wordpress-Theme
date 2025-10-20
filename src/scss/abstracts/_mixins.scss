@@ -1,6 +1,7 @@
 @mixin container {
-    width: min(1100px, 90vw);
-    margin-inline: auto;
+    inline-size: min(100%, 72rem);  
+    margin-inline: auto;            
+    padding-inline: clamp(1rem, 4vw, 2rem); 
 }
 
 @mixin sr-only {
