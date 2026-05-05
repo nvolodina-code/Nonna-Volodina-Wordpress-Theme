@@ -10,6 +10,15 @@
 <body <?php body_class(); ?>>
 	<?php wp_body_open(); ?>
 
-	<header class="site-header"></header>
+	<header class="site-header">
+		<div class="site-logo">
+			<a href="">
+				<img src="" alt="">
+			</a>
+		</div>
+		<div class="site-menu">
+
+		</div>
+	</header>
 
 	<main id="main-content" class="site-main">
