@@ -17,7 +17,7 @@ const paths = {
 function styles() {
 	return src(paths.scss.src)
 	.pipe(sourcemaps.init())
-	.pipe(sass.sync({ outputStyle: 'expanded' }).on('error', sass.logError))
+	.pipe(sass({ style: 'expanded' }).on('error', sass.logError))
 	.pipe(postcss([autoprefix()]))
 	.pipe(cleanCSS({ level: 2 }))
 	.pipe(rename('main.min.css'))

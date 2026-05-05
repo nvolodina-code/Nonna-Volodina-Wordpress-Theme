@@ -11,18 +11,32 @@
 	<?php wp_body_open(); ?>
 
 	<header class="site-header">
-		<div class="site-logo">
+		<div class="site-header__logo">
 			<a href="">
 				<img src="" alt="">
 			</a>
 		</div>
-		<nav class="site-nav" aria-label="<?php esc_attr_e( 'Primary Menu', 'nonna-volodina' ); ?>">
+
+		<button
+			class="site-header__toggle"
+			aria-expanded="false"
+			aria-controls="site-header-nav"
+			aria-label="<?php esc_attr_e( 'Toggle navigation', 'nonna-volodina' ); ?>"
+		>
+			<span class="site-header__toggle-bar"></span>
+			<span class="site-header__toggle-bar"></span>
+			<span class="site-header__toggle-bar"></span>
+		</button>
+
+		<nav id="site-header-nav" class="site-header__nav" aria-label="<?php esc_attr_e( 'Primary Menu', 'nonna-volodina' ); ?>">
 			<?php
-			wp_nav_menu([
-				'theme_location' => 'primary',
-				'menu_class'     => 'primary-menu',
-				'container'      => false,
-			]);
+			wp_nav_menu(
+				array(
+					'theme_location' => 'primary',
+					'menu_class'     => 'site-header__menu',
+					'container'      => false,
+				)
+			);
 			?>
 		</nav>
 	</header>
