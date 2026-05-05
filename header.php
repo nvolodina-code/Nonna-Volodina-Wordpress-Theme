@@ -10,6 +10,16 @@
 <body <?php body_class(); ?>>
 	<?php wp_body_open(); ?>
 
-	<header class="site-header"></header>
+	<header class="site-header">
+		<nav class="site-nav" aria-label="<?php esc_attr_e( 'Primary Menu', 'nonna-volodina' ); ?>">
+			<?php
+			wp_nav_menu([
+				'theme_location' => 'primary',
+				'menu_class'     => 'primary-menu',
+				'container'      => false,
+			]);
+			?>
+		</nav>
+	</header>
 
 	<main id="main-content" class="site-main">
